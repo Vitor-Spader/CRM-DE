@@ -1,4 +1,4 @@
-from IDatabase import IDatabase
+from ingestion.controller.IDatabase import IDatabase
 import sqlite3
 import traceback
 import sys

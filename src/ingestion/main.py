@@ -2,32 +2,60 @@ from datetime import date
 
 from fastapi import FastAPI
 from model.IngestionModels import Order, Customer, OrderItem, Product, User, Store
+from controller.IngestionController import IngestionController
+from controller.Sqlite import SQLite
+
+DATABASE = SQLite(database=':memory:')
 
 app = FastAPI()
 
-@app.post("/Order")
-def recv_order(order_data: list[Order]):
-    return order_data
+@app.post("/Order", status_code=201)
+def recv_order(order_data: list[Order], is_upsert:bool = True):
 
-@app.post("/Customer")
+    ingestion = IngestionController(order_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
+
+@app.post("/Customer", status_code=201)
 def recv_customer(customer_data: list[Customer]):
-    return customer_data
 
-@app.post("/OrderItem")
+    ingestion = IngestionController(customer_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
+
+@app.post("/OrderItem", status_code=201)
 def recv_order_item(order_item_data: list[OrderItem]):
-    return order_item_data
 
-@app.post("/Product")
+    ingestion = IngestionController(order_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
+
+@app.post("/Product", status_code=201)
 def recv_product(product_data: list[Product]):
-    return product_data
 
-@app.post("/Store")
+    ingestion = IngestionController(order_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
+
+@app.post("/Store", status_code=201)
 def recv_store(store_data: list[Store]):
-    return store_data
 
-@app.post("/User")
+    ingestion = IngestionController(order_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
+
+@app.post("/User", status_code=201)
 def recv_user(user_data: list[User]):
-    return user_data
+
+    ingestion = IngestionController(order_data, is_upsert)
+    ingestion = ingestion.write()
+
+    return
 
 ##########################
 #Get Data
